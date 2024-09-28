@@ -1,6 +1,6 @@
 # Proyecto de Estudio
     
-# PRESENTACIÓN "NEW ORDER"
+# Presentación Proyecto "NEW ORDER"
 
 **Asignatura**: Bases de Datos I (FaCENA-UNNE)
 
@@ -16,7 +16,7 @@
 
 ### Caso de estudio
 
-Maecenas molestie lacus tincidunt, placerat dolor et, ullamcorper erat. Mauris tortor nisl, ultricies ac scelerisque nec, feugiat in nibh. 
+Se presenta el caso de estudio como la investigacion sobre los datos de un sistema de gestion ventas implementado presencialmente, donde el área a trabajar será un local de ventas de articulos de polirubro y articulos para el hogar.
 
 ### Definición o planteamiento del problema
 
@@ -51,20 +51,10 @@ Maecenas molestie lacus tincidunt, placerat dolor et, ullamcorper erat. Mauris t
 
 
 ### Diagrama conceptual (opcional)
-Ejemplo usando Live Editor https://mermaid.js.org/ (ejemplo opcional)
-```mermaid
-erDiagram
-CUSTOMER  }|..|{  DELIVERY-ADDRESS  : has
-CUSTOMER  ||--o{  ORDER  : places
-CUSTOMER  ||--o{  INVOICE  : "liable for"
-DELIVERY-ADDRESS  ||--o{  ORDER  : receives
-INVOICE  ||--|{  ORDER  : covers
-ORDER  ||--|{  ORDER-ITEM  : includes
-PRODUCT-CATEGORY  ||--|{  PRODUCT  : contains
-PRODUCT  ||--o{  ORDER-ITEM  : "ordered in"
-```
+El archivo fue generado por la herramienta online utilizada en la materia llamada "ERDPlus"
+
 ### Diagrama relacional
-![diagrama_relacional](https://github.com/dovillegas/basesdatos_proyecto_estudio/blob/main/doc/image_relational.png)
+![diagrama_relacional](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/doc/Modelo-Relacional-Proyecto-New-Order.png)
 
 ### Diccionario de datos
 
