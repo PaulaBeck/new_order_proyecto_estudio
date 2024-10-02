@@ -100,7 +100,7 @@ Un Diagrama de Modelo Relacional también conocido como Diagrama Entidad-Relaci�
 
 La siguiente imagen representa el Modelo Relacional del sistema de gestión de ventas.
 
-![diagrama_relacional(https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/doc/Modelo_Relacional_New_Order.png)]
+![diagrama_relacional](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/doc/Modelo_Relacional_New_Order.png)
 
 **b) Diccionario de Datos**
 
