@@ -37,10 +37,15 @@ i)	**Preguntas Generales**
 ii)	**Preguntas Específicas**
 
 ¿Cómo podemos lograr buscar una factura de venta de forma eficiente?
+
 ¿Cómo optimizo la carga de stock?
+
 ¿Cómo controlo la existencia de un cliente en la Base de Datos?
+
 ¿Cómo realizo una venta de forma eficiente?
+
 ¿Cómo doy de alta/baja un cliente?
+
 ¿Cómo controlo el stock de un producto?
 
 iii)	**Objetivos Generales**
@@ -50,8 +55,11 @@ Dar solución a la problemática de falta de automatización de gestión de vent
 iv)	**Objetivos Específicos**
 
 -Solucionar el cargado manual del inventario.
+
 -Acortar el tiempo de tareas de búsqueda.
+
 -Optimizar la búsqueda de factura de venta.
+
 -Obtener informes o reportes de las ventas y/o productos.
 
 d)	**Descripción del Sistema**
