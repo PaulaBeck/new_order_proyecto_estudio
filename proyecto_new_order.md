@@ -18,12 +18,14 @@ a)	Tema
 Automatización de Gestión de Ventas e Inventario en Empresas.
 
 b)	Definición o planteamiento del Problema
+
 En muchas tiendas dedicadas a la venta de productos, la gestión de ventas, el control de inventarios, etc. la forma de operar (o de trabajar) suelen ser procesos manuales lentos y propensos a errores. Este tipo de gestión no automatizada puede llevar a problemas como pérdida de oportunidades de venta, desorganización en el manejo de productos, y falta de información precisa y oportuna para la toma de decisiones.
 La ausencia de un sistema de gestión centralizado para el manejo de ventas, inventario y clientes genera ineficiencias y errores en el proceso de ventas. Sin una herramienta adecuada, los empleados pierden tiempo en tareas repetitivas, como el registro manual de ventas, la actualización de inventario y la elaboración de reportes, lo cual afecta la productividad general de la empresa. Además, la falta de visibilidad en tiempo real del inventario y de las actividades de ventas dificulta la toma de decisiones estratégicas y puede resultar en una falta o exceso de stock.
 La reiterada tarea de registro manual de ventas o de stock de productos por parte del personal puede llevar a cabo errores como datos duplicados, datos incompletos o similar, perdiendo tiempo en buscar el registro o comparando con otros. 
 Por otro lado, la falta de integración entre las áreas de ventas, inventario y atención al cliente impide que la información fluya de manera eficiente. Esta fragmentación dificulta la generación de reportes consolidados y retrasa la respuesta a solicitudes del cliente, afectando la calidad del servicio y la capacidad de la empresa para adaptarse rápidamente a cambios en la demanda del mercado.
 
 c)	Objetivo del Trabajo Práctico
+
 Uno de los objetivos principales de este trabajo práctico es proporcionar una solución a lo mencionado anteriormente, mediante un sistema de gestión automatizado. 
 Además, se incorporan temas de investigación como el análisis de datos, la gestión de permisos a nivel de usuarios en la base de datos y la optimización de consultas, entre otros.
 i)	Preguntas Generales
