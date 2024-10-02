@@ -75,67 +75,42 @@ e)	**Alcance**
 Debemos mencionar que, en el análisis de los datos, el alcance será limitado, es decir que no se trabajará con el sistema completo sino con una parte de él, haciendo énfasis al procesamiento y administración de ventas que reúnen información acerca de qué vendedor realizó la venta, a qué cliente en particular, qué producto/s fueron vendidos y cuál fue la manera que se realizó el pago, entre otros.
 No se tendrá en cuenta la conexión con proveedores o alguna asociación que provea los productos de la tienda.
 
-
-
 ## CAPITULO II: MARCO CONCEPTUAL O REFERENCIAL
 
 **TEMA 1 " ---- "** 
-Ut sed imperdiet risus. Maecenas vestibulum arcu vitae orci pretium pharetra. Suspendisse potenti. Fusce massa libero, fermentum eget elit in, tincidunt fermentum nunc. Cras imperdiet nisl elit, elementum gravida enim accumsan vel. Sed in sapien quis ante consectetur commodo id non nulla. Aenean lacinia, dolor convallis semper mattis, ante orci elementum nunc, eget feugiat risus neque in urna. Ut ut quam nec risus mollis convallis ornare ac odio. Phasellus efficitur posuere nibh, eget tempor augue pellentesque ac. Ut enim sem, imperdiet non est ut, blandit posuere dui. Curabitur at purus orci. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-
 
 **TEMA 2 " ----- "** 
-Ut sed imperdiet risus. Maecenas vestibulum arcu vitae orci pretium pharetra. Suspendisse potenti. Fusce massa libero, fermentum eget elit in, tincidunt fermentum nunc. Cras imperdiet nisl elit, elementum gravida enim accumsan vel. Sed in sapien quis ante consectetur commodo id non nulla. Aenean lacinia, dolor convallis semper mattis, ante orci elementum nunc, eget feugiat risus neque in urna. Ut ut quam nec risus mollis convallis ornare ac odio. Phasellus efficitur posuere nibh, eget tempor augue pellentesque ac. Ut enim sem, imperdiet non est ut, blandit posuere dui. Curabitur at purus orci. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-
 ...
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA 
 
-Donec lobortis tincidunt erat, non egestas mi volutpat in. Cras ante purus, luctus sed fringilla non, ullamcorper at eros.
-
  **a) Cómo se realizó el Trabajo Práctico**
-Vestibulum rutrum feugiat molestie. Nunc id varius augue. Ut augue mauris, venenatis et lacus ut, mattis blandit urna. Fusce lobortis, quam non vehicula scelerisque, nisi enim ultrices diam, ac tristique libero ex nec orci.
 
  **b) Herramientas (Instrumentos y procedimientos)**
-Donec lobortis tincidunt erat, non egestas mi volutpat in. Cras ante purus, luctus sed fringilla non, ullamcorper at eros. Integer interdum id orci id rutrum. Curabitur facilisis lorem sed metus interdum accumsan. 
 
 
 ## CAPÍTULO IV: DESARROLLO DEL TEMA / PRESENTACIÓN DE RESULTADOS 
+En este capítulo, se presentará de forma detallada, los datos e información que se fueron recopilando para comprender, analizar el caso de estudio y conseguir los resultados esperados.  
 
-Maecenas molestie lacus tincidunt, placerat dolor et, ullamcorper erat. Mauris tortor nisl, ultricies ac scelerisque nec, feugiat in nibh. Pellentesque interdum aliquam magna sit amet rutrum. 
+Se emplearon diversas herramientas para lograr el diseño y la gestión de la información de la base de datos. Algunas de estas herramientas nos permitieron representar gráficamente las entidades, tablas y las relaciones entre las mismas, identificando de manera clara y fácilmente los datos, su estructura y comportamiento.
 
+**a) Diagrama de Modelo Relacional**
 
+Un Diagrama de Modelo Relacional también conocido como Diagrama Entidad-Relación (ER), es una representación gráfica que muestra cómo interactúan las entidades dentro de una base de datos. Este tipo de diagrama ayuda a visualizar las relaciones entre diferentes elementos clave.  
 
-### Diagrama conceptual (opcional)
-El archivo fue generado por la herramienta online utilizada en la materia llamada "ERDPlus"
+La siguiente imagen representa el Modelo Relacional del sistema de gestión de ventas.
 
-### Diagrama relacional
-![diagrama_relacional](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/doc/Modelo-Relacional-Proyecto-New-Order.png)
+![diagrama_relacional (https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/doc/Modelo_Relacional_New_Order.png)
 
-### Diccionario de datos
+**b) Diccionario de Datos**
 
-Acceso al documento [PDF](doc/diccionario_datos.pdf) del diccionario de datos.
+Es una herramienta fundamental en la administración de datos que proporciona una representación estructurada de los elementos de datos, sus tipos, relaciones y metadatos asociados. En ella, se almacena información detallada sobre cada elemento de datos, como nombres de variables, tipos de datos, formatos, longitudes y descripciones.
 
+Acceso al documento [PDF](doc/DiccionarioDeDatos_NewOrder.pdf) del diccionario de datos.
 
-### Desarrollo TEMA 1 "----"
-
-Fusce auctor finibus lectus, in aliquam orci fermentum id. Fusce sagittis lacus ante, et sodales eros porta interdum. Donec sed lacus et eros condimentum posuere. 
-
-> Acceder a la siguiente carpeta para la descripción completa del tema [scripts-> tema_1](script/tema01_nombre_tema)
-
-### Desarrollo TEMA 2 "----"
-
-Proin aliquet mauris id ex venenatis, eget fermentum lectus malesuada. Maecenas a purus arcu. Etiam pellentesque tempor dictum. 
-
-> Acceder a la siguiente carpeta para la descripción completa del tema [scripts-> tema_2](script/tema02_nombre_tema)
-
-... 
-
+> Acceder al código del script general de la base de datos [script-> codigo_general](script/Proyecto_New_Order.sql)
 
 ## CAPÍTULO V: CONCLUSIONES
-
-Nunc sollicitudin purus quis ante sodales luctus. Proin a scelerisque libero, vitae pharetra lacus. Nunc finibus, tellus et dictum semper, nisi sem accumsan ligula, et euismod quam ex a tellus. 
-
-
 
 ## BIBLIOGRAFÍA DE CONSULTA
 
