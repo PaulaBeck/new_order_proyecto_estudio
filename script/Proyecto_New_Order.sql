@@ -109,6 +109,7 @@ CREATE TABLE Empleado
 CREATE TABLE Venta
 (
   id_venta INT IDENTITY NOT NULL,
+  fecha_venta DATE NOT NULL,
   date_create DATETIME NOT NULL CONSTRAINT DF_Venta_date_create DEFAULT GETDATE(),
   user_create VARCHAR(100) NOT NULL CONSTRAINT DF_Venta_user_create DEFAULT SUSER_SNAME(),
   activo BIT CONSTRAINT DF_Venta_activo DEFAULT 1 NOT NULL,
