@@ -26,7 +26,7 @@ CREATE TABLE Persona
   email VARCHAR(200) NOT NULL,
   fecha_nacimiento DATE NOT NULL,
   date_create DATETIME NOT NULL CONSTRAINT DF_Persona_date_create DEFAULT GETDATE(),
-  user_create INT NOT NULL CONSTRAINT DF_Persona_user_create DEFAULT SUSER_SNAME(),
+  user_create VARCHAR(100) NOT NULL CONSTRAINT DF_Persona_user_create DEFAULT SUSER_SNAME(),
   CONSTRAINT PK_Persona PRIMARY KEY (id_persona),
   CONSTRAINT UQ_Persona_email UNIQUE (email),
   CONSTRAINT UQ_Persona_dni UNIQUE (dni)
