@@ -33,61 +33,82 @@ c)	**Objetivo del Trabajo Práctico**
 Uno de los objetivos principales de este trabajo práctico es proporcionar una solución a lo mencionado anteriormente, mediante un sistema de gestión automatizado. 
 Además, se incorporan temas de investigación como el análisis de datos, la gestión de permisos a nivel de usuarios en la base de datos y la optimización de consultas, entre otros.
 
-i)	**Preguntas Generales**
+i)	**Preguntas Generales**  
+  - ¿Cómo podemos optimizar la gestión de ventas, inventarios y clientes en una empresa de ventas?
 
-¿Cómo podemos optimizar la gestión de ventas, inventarios y clientes en una empresa de ventas?
+ii)	**Preguntas Específicas**  
+- ¿Cómo podemos lograr buscar una factura de venta de forma eficiente?  
+- ¿Cómo optimizo la carga de stock?  
+- ¿Cómo controlo la existencia de un cliente en la Base de Datos?  
+- ¿Cómo realizo una venta de forma eficiente?  
+- ¿Cómo doy de alta/baja un cliente?  
+- ¿Cómo controlo el stock de un producto?  
 
-ii)	**Preguntas Específicas**
+iii)	**Objetivos Generales**  
+  - Dar solución a la problemática de falta de automatización de gestión de venta/Inventario/cliente de una empresa. 
 
-¿Cómo podemos lograr buscar una factura de venta de forma eficiente?
+iv)	**Objetivos Específicos**  
+  - Solucionar el cargado manual del inventario.  
+  - Acortar el tiempo de tareas de búsqueda.  
+  - Optimizar la búsqueda de factura de venta.
+  - Obtener informes o reportes de las ventas y/o productos.
 
-¿Cómo optimizo la carga de stock?
+d)	**Descripción del Sistema**  
+El sistema de gestión de ventas está diseñado para tiendas físicas de artículos de bazar y poli rubro en la provincia de Corrientes, con sucursales tanto en la capital como en el interior.  
+Está orientado a registrar y administrar de forma manual las ventas, clientes, productos y otros datos correspondientes al comercio en cuestión.  
 
-¿Cómo controlo la existencia de un cliente en la Base de Datos?
+El sistema cuenta con módulos específicos asignados según el perfil del personal de la empresa, destacando los roles de gerente, vendedor y administrador del sistema.  
+Cada perfil tiene acceso a funcionalidades clave que mejoran su gestión. Los vendedores se encargan de la administración de clientes, la gestión de productos y el procesamiento de ventas. El gerente general tiene acceso a la gestión del personal, clientes, productos e informes. Por su parte, el administrador se encarga del respaldo y la seguridad de los datos, gestionando el backup del sistema.
 
-¿Cómo realizo una venta de forma eficiente?
-
-¿Cómo doy de alta/baja un cliente?
-
-¿Cómo controlo el stock de un producto?
-
-iii)	**Objetivos Generales**
-
-Dar solución a la problemática de falta de automatización de gestión de venta/Inventario/cliente de una empresa. 
-
-iv)	**Objetivos Específicos**
-
--Solucionar el cargado manual del inventario.
-
--Acortar el tiempo de tareas de búsqueda.
-
--Optimizar la búsqueda de factura de venta.
-
--Obtener informes o reportes de las ventas y/o productos.
-
-d)	**Descripción del Sistema**
-
-El sistema de gestión de ventas está diseñado para tiendas físicas de artículos de bazar y poli rubro en la provincia de Corrientes, con sucursales tanto en la capital como en el interior. Está orientado a registrar y administrar de forma manual las ventas, clientes, productos y otros datos correspondientes al comercio en cuestión.
-El sistema cuenta con módulos específicos asignados según el perfil del personal de la empresa, destacando los roles de gerente, vendedor y administrador del sistema. Cada perfil tiene acceso a funcionalidades clave que mejoran su gestión. Los vendedores se encargan de la administración de clientes, la gestión de productos y el procesamiento de ventas. El gerente general tiene acceso a la gestión del personal, clientes, productos e informes. Por su parte, el administrador se encarga del respaldo y la seguridad de los datos, gestionando el backup del sistema.
-
-e)	**Alcance**
-
-Debemos mencionar que, en el análisis de los datos, el alcance será limitado, es decir que no se trabajará con el sistema completo sino con una parte de él, haciendo énfasis al procesamiento y administración de ventas que reúnen información acerca de qué vendedor realizó la venta, a qué cliente en particular, qué producto/s fueron vendidos y cuál fue la manera que se realizó el pago, entre otros.
+e)	**Alcance**  
+Debemos mencionar que, en el análisis de los datos, el alcance será limitado, es decir que no se trabajará con el sistema completo sino con una parte de él, haciendo énfasis al procesamiento y administración de ventas que reúnen información acerca de qué vendedor realizó la venta, a qué cliente en particular, qué producto/s fueron vendidos y cuál fue la manera que se realizó el pago, entre otros.  
 No se tendrá en cuenta la conexión con proveedores o alguna asociación que provea los productos de la tienda.
 
 ## CAPITULO II: MARCO CONCEPTUAL O REFERENCIAL
 
-**TEMA 1 " ---- "** 
+**TEMA 1: "Manejo de permisos a nivel de usuarios de base de datos"** 
 
-**TEMA 2 " ----- "** 
-...
+**TEMA 2: "Procedimientos y funciones almacenadas"** 
+
+**TEMA 3: "Optimización de consultas a través de índices"**  
+
+**Índices en bases de datos:**
+
+Los índices son estructuras que optimizan el rendimiento de las consultas en bases de datos.  
+Su propósito es acelerar el tiempo de recuperación de información y mejorar el procesamiento de las consultas en tablas o vistas, permitiendo obtener los datos solicitados de manera rápida, sin la necesidad de explorar toda la tabla.
+
+**Tipos de índices y usos:**  
+Existen diversos tipos de índices, cada uno diseñado para cumplir funciones específicas.
+  - Índice único: mantienen la integridad referencial y previenen la existencia de datos duplicados.
+  - índice espacial: utilizados para manejar información geométrica.
+  - índice hash: almacenan tablas en memoria que garantizan un consumo de espacio de memoria constante.
+  - Índice filtrado: aplican filtros para seleccionar subconjuntos de datos. 
+
+**Indices en SQL SERVER:**
+ ![tema3_img_comparacion_indices1](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_comparacion_indices1.jpg)
+ ![tema3_img_comparacion_indices2](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_comparacion_indices2.jpg)
+
+En la parte práctica de este tema, nos centraremos en crear y analizar el comportamiento de los tiempos de respuesta y el rendimiento de los índices agrupados e índices no agrupados.  
+Las actividades y resolucion de las mismas se encuentran dentro de la carpeta "Tema 3" de este repositorio
+
+**TEMA 4: "Manejo de tipos de datos JSON"** 
+
+
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA 
 
- **a) Cómo se realizó el Trabajo Práctico**
+ **a) Cómo se realizó el Trabajo Práctico**  
+El trabajo se desarrolló de manera grupal, utilizando herramientas colaborativas que facilitaron el trabajo remoto. GitHub fue empleado para la gestión del código y control de versiones, permitiendo la integración y seguimiento de los aportes de cada miembro. Además, se utilizó Google Drive para el almacenamiento y organización de documentos, lo que garantizó un flujo de trabajo eficiente y accesible para todo el grupo.
 
  **b) Herramientas (Instrumentos y procedimientos)**
-
+Para el desarrollo del sistema de gestión de ventas, se emplearon diversas herramientas tanto para el diseño como para la gestión de la base de datos y la documentación del proyecto.  
+Entre ellas:  
+  - ERD Plus: Utilizado para la creación del modelo entidad-relación, facilitando el diseño de la estructura de la base de datos.
+  - DRAW.IO: Herramienta empleada para la creación de diagramas de flujo, casos de uso y otros diagramas visuales del sistema.
+  - SQL Server: Base de datos utilizada para almacenar y gestionar la información del sistema.
+  - Diagrama Entidad-Relación (DER): Representó visualmente la estructura y relaciones entre las entidades del sistema.
+  - Diagrama de Modelo Relacional: Representó visualmente a modo de tablas los campos y tipo de datos de cada tabla
+  - Diccionario de Datos: Documentó los campos, tipos de datos y relaciones de la base de datos, proporcionando una guía clara para su implementación.
 
 ## CAPÍTULO IV: DESARROLLO DEL TEMA / PRESENTACIÓN DE RESULTADOS 
 En este capítulo, se presentará de forma detallada, los datos e información que se fueron recopilando para comprender, analizar el caso de estudio y conseguir los resultados esperados.  
@@ -108,15 +129,30 @@ Es una herramienta fundamental en la administración de datos que proporciona un
 
 Acceso al documento [PDF](doc/DiccionarioDeDatos_NewOrder.pdf) del diccionario de datos.
 
-> Acceder al código del script general de la base de datos [script-> codigo_general](script/Proyecto_New_Order.sql)
+## CAPÍTULO V: CONCLUSIONES  
 
-## CAPÍTULO V: CONCLUSIONES
+**Tema 3: Optimización de consultas a través de índices**
+
+La implementación de índices, tanto agrupados como no agrupados, ha demostrado ser una estrategia efectiva para mejorar el rendimiento de las consultas en bases de datos con grandes volúmenes de datos.  
+
+Las pruebas indican que la reducción en el tiempo de ejecución y en las lecturas lógicas es considerable, lo que resulta en una mejora en la eficiencia general del sistema. Por lo tanto, se recomienda el uso adecuado de índices en el diseño de bases de datos para optimizar el acceso a los datos y mejorar la experiencia del usuario en aplicaciones que dependen de consultas rápidas.
 
 ## BIBLIOGRAFÍA DE CONSULTA
 
  1. List item
  2. List item
- 3. List item
+
+ 3. Tema 03 - Índices:  
+  - Índices, tipos, usos, diseño óptimo de agrupados y no agrupados (link general)  
+https://www.sqlshack.com/es/indices-del-sql-server-serie-introductoria/
+
+ - Tipos de indices:  
+https://learn.microsoft.com/es-es/sql/relational-databases/indexes/indexes?view=sql-server-ver16  
+https://www.sqlshack.com/es/uso-de-diferentes-tipos-de-indices-sql-server/
+
+ - Índices agrupados y no agrupados:  
+https://www.sqlshack.com/es/diseno-efectivo-de-indices-agrupados-sql-server/  
+https://www.sqlshack.com/es/diseno-efectivo-de-indices-no-agrupados-sql-server/
+
  4. List item
  5. List item
-
