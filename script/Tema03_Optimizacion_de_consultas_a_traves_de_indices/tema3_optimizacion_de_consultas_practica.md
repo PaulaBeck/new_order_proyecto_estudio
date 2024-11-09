@@ -1,22 +1,30 @@
-/* Tema 4: Optimización de consultas a través de índices
+Tema 4: Optimización de consultas a través de índices
+
 
 Objetivos de Aprendizaje:
 	* Conocer los tipos de índices y sus aplicaciones.
 	* Evaluar el impacto de los índices en el rendimiento de las consultas.
+
 
 Criterios de Evaluación:
 	* Medición correcta de los tiempos de respuesta antes y después de aplicar índices.
 	* Documentación detallada de los planes de ejecución de las consultas.
 	* Evaluación de la mejora en el rendimiento.
 
+
 Tareas: 
 	1) Realizar una carga masiva de por lo menos un millón de registro sobre alguna tabla que contenga un campo fecha (sin índice). Hacerlo con un script para poder automatizarlo.
+ 
 	2) Realizar una búsqueda por periodo y registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
+ 
 	3) Definir un índice agrupado sobre la columna fecha y repetir la consulta anterior.
 		Registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
+  
 	4) Borrar el índice creado.
+ 
 	5) Definir otro índice agrupado sobre la columna fecha pero que además incluya las columnas seleccionadas y repetir la consulta anterior.
 		Registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
+  
 	6) Expresar las conclusiones en base a las pruebas realizadas.
 
 Resolucion:
@@ -46,8 +54,7 @@ Resolucion:
 
 	Plan de Ejecucion:
 	(imagen 1 -> tema3_img_ejecucion_2)
- ![tema3_img_ejecucion_2]
- (https://github.com/PaulaBeck/new_order_proyecto_estudio/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_ejecucion_2.jpg)
+ ![tema3_img_ejecucion_2](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_ejecucion_2.jpg)
 
 	3) Definir un índice agrupado sobre la columna fecha y repetir la consulta anterior.
 		Observamos que al querer crear un nuevo indice agrupado ocurre un error, ya que la tabla "Ventas2" ya posee un indice agrupado y en
