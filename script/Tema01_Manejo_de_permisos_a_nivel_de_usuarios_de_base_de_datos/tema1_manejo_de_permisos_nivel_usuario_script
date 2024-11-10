@@ -1,0 +1,234 @@
+-- Crear la base de datos
+CREATE DATABASE DB_NEW_ORDER;
+GO
+-- Ubicarse en la BD a trabajar
+USE DB_NEW_ORDER;
+GO
+
+CREATE TABLE Persona
+(
+  id_persona INT IDENTITY NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  apellido VARCHAR(100) NOT NULL,
+  dni NUMERIC(8) NOT NULL,
+  telefono VARCHAR(15) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  fecha_nacimiento DATE NOT NULL,
+  date_create DATETIME NOT NULL CONSTRAINT DF_Persona_date_create DEFAULT GETDATE(),
+  user_create INT NOT NULL CONSTRAINT DF_Persona_user_create DEFAULT SUSER_SNAME(),
+  CONSTRAINT PK_Persona PRIMARY KEY (id_persona),
+  CONSTRAINT UQ_Persona_email UNIQUE (email),
+  CONSTRAINT UQ_Persona_dni UNIQUE (dni)
+);
+GO
+
+CREATE TABLE Cliente
+(
+  id_cliente INT IDENTITY NOT NULL,
+  activo BIT CONSTRAINT DF_Cliente_activo DEFAULT 1 NOT NULL,
+  id_persona INT NOT NULL,
+  CONSTRAINT PK_Cliente PRIMARY KEY (id_cliente),
+  CONSTRAINT FK_Cliente_Persona FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
+);
+GO
+
+CREATE TABLE Perfil
+(
+  id_perfil INT IDENTITY NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  activo BIT CONSTRAINT DF_Perfil_activo DEFAULT 1 NOT NULL,
+  CONSTRAINT PK_Perfil PRIMARY KEY (id_perfil)
+);
+GO
+
+CREATE TABLE Categoria
+(
+  id_categoria INT IDENTITY NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  activo BIT CONSTRAINT DF_Categoria_activo DEFAULT 1 NOT NULL,
+  CONSTRAINT PK_Categoria PRIMARY KEY (id_categoria)
+);
+GO
+
+CREATE TABLE Metodo_pago
+(
+  id_metodo_pago INT IDENTITY NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  proveedor VARCHAR(100) NOT NULL,
+  CONSTRAINT PK_Metodo_pago PRIMARY KEY (id_metodo_pago)
+);
+GO
+
+CREATE TABLE Ciudad
+(
+  id_ciudad INT IDENTITY NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  cod_postal VARCHAR(10) NOT NULL,
+  CONSTRAINT PK_Ciudad PRIMARY KEY (id_ciudad)
+);
+GO
+
+CREATE TABLE Sucursal
+(
+  id_sucursal INT IDENTITY NOT NULL,
+  calle VARCHAR(100) NOT NULL,
+  telefono VARCHAR(15) NOT NULL,
+  nro_calle INT NOT NULL,
+  activo BIT CONSTRAINT DF_Sucursal_activo DEFAULT 1 NOT NULL,
+  id_ciudad INT NOT NULL,
+  CONSTRAINT PK_Sucursal PRIMARY KEY (id_sucursal),
+  CONSTRAINT FK_Sucursal_Ciudad FOREIGN KEY (id_ciudad) REFERENCES Ciudad(id_ciudad)
+);
+GO
+
+CREATE TABLE Producto
+(
+  id_producto INT IDENTITY NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion VARCHAR(200) NOT NULL,
+  precio FLOAT NOT NULL,
+  stock INT NOT NULL,
+  stock_minimo INT NOT NULL,
+  imagen VARCHAR(200) NULL,
+  activo BIT CONSTRAINT DF_Producto_activo DEFAULT 1 NOT NULL,
+  id_categoria INT NOT NULL,
+  CONSTRAINT PK_Producto PRIMARY KEY (id_producto),
+  CONSTRAINT FK_Producto_Categoria FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
+);
+GO
+
+CREATE TABLE Empleado
+(
+  id_empleado INT IDENTITY NOT NULL,
+  clave VARCHAR(100) NOT NULL,
+  sueldo FLOAT NOT NULL,
+  hora_entrada TIME NOT NULL,
+  hora_salida TIME NOT NULL,
+  activo BIT CONSTRAINT DF_Empleado_activo DEFAULT 1 NOT NULL,
+  id_perfil INT NOT NULL,
+  id_persona INT NOT NULL,
+  id_sucursal INT NOT NULL,
+  CONSTRAINT PK_Empleado PRIMARY KEY (id_empleado),
+  CONSTRAINT FK_Empleado_Perfil FOREIGN KEY (id_perfil) REFERENCES Perfil(id_perfil),
+  CONSTRAINT FK_Empleado_Persona FOREIGN KEY (id_persona) REFERENCES Persona(id_persona),
+  CONSTRAINT FK_Empleado_Sucursal FOREIGN KEY (id_sucursal) REFERENCES Sucursal(id_sucursal)
+);
+GO
+
+CREATE TABLE Venta
+(
+  id_venta INT IDENTITY NOT NULL,
+  date_create DATETIME NOT NULL CONSTRAINT DF_Venta_date_create DEFAULT GETDATE(),
+  user_create VARCHAR(100) NOT NULL CONSTRAINT DF_Venta_user_create DEFAULT SUSER_SNAME(),
+  activo BIT CONSTRAINT DF_Venta_activo DEFAULT 1 NOT NULL,
+  id_cliente INT NOT NULL,
+  id_empleado INT NOT NULL,
+  id_metodo_pago INT NOT NULL,
+  CONSTRAINT PK_Venta PRIMARY KEY (id_venta),
+  CONSTRAINT FK_Venta_Cliente FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
+  CONSTRAINT FK_Venta_Empleado FOREIGN KEY (id_empleado) REFERENCES Empleado(id_empleado),
+  CONSTRAINT FK_Venta_Metodo_pago FOREIGN KEY (id_metodo_pago) REFERENCES Metodo_pago(id_metodo_pago)
+);
+GO
+
+CREATE TABLE Detalle_Venta
+(
+  cantidad INT NOT NULL,
+  precio_producto FLOAT NOT NULL,
+  id_producto INT NOT NULL,
+  id_venta INT NOT NULL,
+  CONSTRAINT PK_Detalle_Venta PRIMARY KEY (id_producto, id_venta),
+  CONSTRAINT FK_Detalle_Venta_Producto FOREIGN KEY (id_producto) REFERENCES Producto(id_producto),
+  CONSTRAINT FK_Detalle_Venta_Venta FOREIGN KEY (id_venta) REFERENCES Venta(id_venta)
+);
+-------------------------------------------------------------------
+-- Tema: Manejo de permisos a nivel de usuarios de base de datos --
+-------------------------------------------------------------------
+--Objetivos de Aprendizaje:
+--*Entender el manejo de permisos y roles en bases de datos.
+--*Aplicar permisos de lectura, escritura y ejecución para diferentes roles y usuarios.
+
+--Criterios de Evaluación:
+--*Precisión en la configuración de permisos y roles para usuarios de base de datos.
+--*Correcta implementación y prueba de restricciones de acceso.
+--*Documentación detallada del comportamiento de los usuarios según los permisos asignados.
+
+--Tareas: 
+--*Verificar que la base de datos esté configurada en modo mixto (autenticación integrada con windows y por usuario de base de datos).
+--*Manejo de permisos a nivel de roles y de usuarios. Implementar un caso práctico para cada uno.
+
+--1)Permisos a nivel de usuarios:
+--*Crear dos usuarios de base de datos.
+--*A un usuario darle el permiso de administrador y al otro usuario solo permiso de lectura.
+--*Utilizar los procedimientos almacenados creados anteriormente.
+--*Al usuario con permiso de solo lectura, darle permiso de ejecución sobre este procedimiento. 
+--*Realizar INSERT con sentencia SQL sobre la tabla del procedimiento con ambos usuarios.
+--*Realizar un INSERT a través del procedimiento almacenado con el usuario con permiso de solo lectura
+
+--2)Permisos a nivel de roles del DBMS:
+--*Crear dos usuarios de base de datos.
+--*Crear un rol que solo permita la lectura de alguna de las tablas creadas.
+--*Darle permiso a uno de los usuarios sobre el rol creado anteriormente.
+--*Verificar el comportamiento de ambos usuarios (el que tiene permiso sobre el rol y el que no tiene), cuando intentan leer el contenido de la tabla
+------------------------------------------------------------------------------------------------------------------------------------------------------
+--1)Manejo de Permisos a Nivel de Usuarios
+--creacion del usuario con permisos de ADMINISTRADOR
+CREATE LOGIN UsuarioAdmin WITH PASSWORD = 'passwordAdmin';
+CREATE USER UsuarioAdmin FOR LOGIN UsuarioAdmin;
+--Otorgar permisos de administrador a UsuarioAdmin
+ALTER ROLE db_owner ADD MEMBER UsuarioAdmin;
+--Realizar un INSERT directamente en la tabla con UsuarioAdmin
+EXECUTE AS USER = 'UsuarioAdmin';--Simular el contexto de UsuarioAdmin
+INSERT Producto (nombre, descripcion, precio, stock, stock_minimo, imagen, id_categoria)
+VALUES 
+('Laptop Noblex', 'Laptop de alto rendimiento', 2000.00, 10, 2, 'laptop_dell.jpg', 1)
+--Verificar la insercion del nuevo producto
+SELECT * FROM Producto;
+REVERT--Una vez terminada la prueba, volver al contexto del usuario original
+
+--creacion del usuario con permisos de solo LECTURA
+CREATE LOGIN UsuarioLectura WITH PASSWORD = 'passwordLectura';
+CREATE USER UsuarioLectura FOR LOGIN UsuarioLectura;
+--Otorgar permisos de solo lectura a UsuarioLectura
+GRANT SELECT ON Producto TO UsuarioLectura;
+REVOKE SELECT ON Producto FROM UsuarioLectura;--en caso e querer eliminar el permiso
+-- Otorgar permiso de ejecución a UsuarioLectura para el procedimiento insertarProducto
+GRANT EXECUTE ON PROCEDURE insertarProducto TO UsuarioLectura;
+EXECUTE AS USER = 'UsuarioLectura';--Simular el contexto de UsuarioLectura
+--prueba para verificar si se aplico el permiso para el usuarioLectura
+INSERT Producto (nombre, descripcion, precio, stock, stock_minimo, imagen, id_categoria)
+VALUES ('Lapto', 'Laptop de alto rendimiento', 2000.00, 10, 2, 'laptop_dell.jpg', 1)-- NO DEBE PERMITIR
+--Realizar un INSERT a través del procedimiento almacenado con el usuario con permiso de solo lectura(tambien falla ya que 
+--no tiene permiso de ejecutar el procedimiento)
+EXEC insertarProducto 'Monitor Len 4K', 'Monitor de alta resolución con 4K UHD', 500.00, 15, 3, 'monitor_dell4k.jpg', 1;
+SELECT * FROM Producto;
+REVERT--Una vez terminada la prueba, volver al contexto del usuario original
+
+
+
+--2)Permisos a nivel de roles del DBMS:
+--Crear Usuarios y un Rol de Solo Lectura :
+CREATE LOGIN UsuarioRol1 WITH PASSWORD = '1234';
+CREATE USER UsuarioRol1 FOR LOGIN UsuarioRol1;
+CREATE LOGIN UsuarioRol2 WITH PASSWORD = '12345';
+CREATE USER UsuarioRol2 FOR LOGIN UsuarioRol2;
+
+-- Crear un rol que solo permite lectura
+CREATE ROLE RolSoloLectura;
+GRANT SELECT ON Producto TO RolSoloLectura;
+
+-- Asignar el rol a UsuarioRol1
+ALTER ROLE RolSoloLectura ADD MEMBER UsuarioRol1;
+
+--Pruebas de Lectura en la Tabla con Usuarios de Roles Diferentes :
+--Con UsuarioRol1, intenta seleccionar datos de la tabla Producto(debe permitir la lectura)
+EXECUTE AS USER = 'UsuarioRol1';
+SELECT * FROM Producto;
+--verificar que no permita otra accion en producto mas que lectura
+INSERT Producto (nombre, descripcion, precio, stock, stock_minimo, imagen, id_categoria)
+VALUES ('Laptop Lenovo pad', 'Laptop de alto rendimiento', 4000.00, 10, 2, 'laptop_dell.jpg', 1)-- NO DEBE PERMITIR
+REVERT;
+--Con UsuarioRol2(que no tiene permisos), intenta leer la misma tabla (debería fallar)
+EXECUTE AS USER = 'UsuarioRol2';
+SELECT * FROM Producto;
+REVERT;
