@@ -1,5 +1,4 @@
 Trabajo Práctico: Manejo de Permisos a Nivel de Usuarios en Base de Datos
-Tema: Permisos y Roles de Usuario en Bases de Datos
 Objetivos de aprendizaje
 -Entender la asignación de permisos a nivel de usuarios y roles en una base de datos.
 -Aplicar permisos de lectura, escritura y ejecución en un entorno seguro y controlado.
