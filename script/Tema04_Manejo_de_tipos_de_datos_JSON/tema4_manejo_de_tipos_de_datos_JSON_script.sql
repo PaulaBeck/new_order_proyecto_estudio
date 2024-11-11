@@ -71,7 +71,7 @@ SELECT
 	id_ciudad AS ID,--> se selecciona como una columna normal de sql server
     JSON_VALUE(datos_ciudad, '$.nombre') AS Nombre,--> debo acceder al objeto, al atributo al cual quiero acceder 
     JSON_VALUE(datos_ciudad, '$.cod_postal') AS 'Código Postal'--> debo acceder al objeto, al atributo al cual quiero acceder
---	JSON_VALUE(datos_ciudad, '$.region') AS 'Código Postal'--> ya que agregue un nuevo Clave-Valor en el objeto 2, habra un nuevo alemento 
+--	JSON_VALUE(datos_ciudad, '$.region') AS 'Regiones'--> ya que agregue un nuevo Clave-Valor en el objeto 2, habra un nuevo atributo 
 FROM Ciudad;
 
 SELECT * FROM Ciudad;
