@@ -70,6 +70,12 @@ No se tendrá en cuenta la conexión con proveedores o alguna asociación que pr
 
 **TEMA 2: "Procedimientos y funciones almacenadas"** 
 
+Procedimientos Almacenados  
+Los procedimientos almacenados son conjuntos de instrucciones SQL que se almacenan en la base de datos y que pueden ser ejecutados como una unidad. Estos procedimientos permiten realizar operaciones complejas, incluyendo consultas, manipulaciones de datos y operaciones condicionales. Los procedimientos almacenados pueden aceptar parámetros de entrada y salida, ejecutar sentencias SQL de manera más eficiente y, por lo general, mejoran la seguridad al permitir el control del acceso a los datos y la lógica encapsulada.
+
+Funciones Almacenadas  
+Las funciones almacenadas son similares a los procedimientos, pero su principal diferencia es que siempre devuelven un valor (o un conjunto de valores) como resultado. Las funciones almacenadas suelen ser utilizadas para realizar cálculos o transformaciones y pueden ser invocadas desde una consulta SQL, como parte de una cláusula SELECT, WHERE u otra. A diferencia de los procedimientos, las funciones tienen restricciones más estrictas sobre lo que pueden hacer dentro de su ejecución (por ejemplo, no pueden modificar directamente los datos de la tabla).
+
 **TEMA 3: "Optimización de consultas a través de índices"**  
 
 **Índices en bases de datos:**
@@ -130,6 +136,14 @@ Es una herramienta fundamental en la administración de datos que proporciona un
 Acceso al documento [PDF](doc/DiccionarioDeDatos_NewOrder.pdf) del diccionario de datos.
 
 ## CAPÍTULO V: CONCLUSIONES  
+
+**TEMA 2: "Procedimientos y funciones almacenadas"** 
+
+La implementación de procedimientos y funciones almacenadas en bases de datos es una estrategia ampliamente utilizada para encapsular lógica de negocio directamente en el servidor, aportando múltiples beneficios que optimizan el rendimiento, la seguridad y la modularidad de las aplicaciones. Estas herramientas son valiosas cuando se busca reducir el tráfico de red, simplificar la ejecución de operaciones repetitivas o realizar tareas complejas de forma más eficiente, lo que a menudo lleva a un desarrollo más ágil y menos propenso a errores al centralizar la lógica crítica en un solo punto de control.  
+
+Sin embargo, su uso también conlleva desafíos que deben ser evaluados cuidadosamente. La dependencia de la base de datos específica puede limitar la portabilidad de la solución, y la dificultad para depurar o mantener el código almacenado puede complicar la gestión de proyectos con equipos grandes o distribuidos. Además, para aplicaciones distribuidas o arquitecturas basadas en microservicios, centralizar la lógica puede convertirse en un obstáculo para la escalabilidad.
+
+En conclusión, el uso de procedimientos y funciones almacenadas debe implementarse con atención, buscando maximizar sus ventajas cuando la lógica en el servidor sea crítica, pero sin comprometer la flexibilidad, el mantenimiento o la capacidad de evolución del sistema. La decisión debe alinearse con las necesidades específicas del proyecto, el entorno de despliegue y los objetivos de rendimiento y seguridad, asegurando un equilibrio adecuado entre simplicidad, control y eficiencia.
 
 **Tema 3: Optimización de consultas a través de índices**
 
