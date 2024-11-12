@@ -1,41 +1,42 @@
-Trabajo Práctico: Manejo de Permisos a Nivel de Usuarios en Base de Datos
-Objetivos de aprendizaje
--Entender la asignación de permisos a nivel de usuarios y roles en una base de datos.
--Aplicar permisos de lectura, escritura y ejecución en un entorno seguro y controlado.
--Implementar casos prácticos de asignación de permisos a usuarios específicos y verificar el control de acceso en operaciones de lectura y escritura.
-
-Resumen de la Actividad Realizada
+Trabajo Práctico: Manejo de Permisos a Nivel de Usuarios en Base de Datos:
 En este trabajo práctico, se desarrollaron configuraciones de permisos en la base de datos DB_NEW_ORDER, diseñados para gestionar productos, ventas, clientes, empleados y sucursales de una tienda. Se enfocó en la asignación de permisos a usuarios individuales y roles, asegurando que el acceso a los datos sea seguro y controlado. Las siguientes actividades fueron realizadas para este fin:
 
+
 1. Creación de Usuarios con Permisos Diferenciados
-Para demostrar el manejo de permisos, se crearon dos usuarios con diferentes niveles de acceso:
--Usuario con permiso de Administrador ( UsuarioAdmin) : Se le otorgó acceso completo a la base de datos a través del rol db_owner, permitiéndole realizar todas las operaciones sobre las tablas.
--Usuario con permiso de Solo Lectura ( UsuarioLectura) : Este usuario solo puede leer los datos de la tabla Producto, sin capacidad de modificar o eliminar datos.
-Se verificó el acceso de cada usuario mediante pruebas de inserción y consulta en la tabla Producto. Mientras UsuarioAdmin puede insertar y leer datos sin restricciones, UsuarioLectura sólo puede realizar consultas ( SELECT) en Producto, y no puede insertar ni modificar información.
+En una base de datos, los permisos de usuario se asignan para limitar o acciones que permitirán como lectura (SELECT), inserción (INSERT), actualización (UPDATE) o eliminación (DELETE). Estos permisos permiten que los administradores controlen el acceso a datos críticos, impidiendo modificaciones no autorizadas.
+
+Implementación : Se crearon dos usuarios con niveles de acceso diferenciados:
+-Usuario con Permiso de Administrador (UsuarioAdmin) : Este usuario fue asignado al rol db_owner, que proporciona acceso completo a la base de datos. Así, puede realizar todas las operaciones sobre las tablas sin restricciones.
+-Usuario con Permiso de Solo Lectura (UsuarioLectura) : Este usuario solo tiene permisos de lectura sobre la tabla Producto. Puede realizar consultas (SELECT) en Producto, pero no tiene capacidad para modificar o eliminar datos.
+
+Prueba : Se verificó el acceso de cada usuario. Mientras que UsuarioAdmin podía insertar y leer datos sin restricciones, UsuarioLectura sólo pudo realizar consultas en la tabla Producto, sin permisos para realizar inserciones o modificaciones directas.
 
 2. Asignación de Permisos de Ejecución de Procedimientos Almacenados
-Además de la manipulación directa de tablas, se configuran permisos para la ejecución de procedimientos almacenados:
--Se implementó un procedimiento almacenado llamado insertarProducto para insertar productos en la base de datos.
--Se otorgó al UsuarioLectura permiso de ejecución sobre insertarProducto, permitiéndole realizar inserciones indirectamente, sin acceso directo a la tabla.
+Los procedimientos almacenados permiten encapsular lógicas específicas (como inserciones o actualizaciones) y ejecutarlas mediante permisos controlados, lo que aporta flexibilidad y seguridad en el acceso. Asignar permisos de ejecución sobre procedimientos almacenados permite a los usuarios realizar operaciones indirectas sin acceso directo a las tablas.
 
-Se realizaron pruebas donde UsuarioLectura intentaron insertar datos Producto tanto directamente como a través del procedimiento almacenado. Los resultados mostraron que:
--UsuarioLectura no puede realizar un INSERT directo en Producto, ya que solo tiene permiso de lectura.
--UsuarioLectura puede ejecutar insertarProducto si se le concede el permiso de ejecución, logrando insertar datos en la tabla de forma controlada.
+Implementación : Se creó el procedimiento almacenado insertarProducto para insertar productos en la base de datos. A UsuarioLectura se le otorgó permiso de ejecución sobre este procedimiento, permitiéndole insertar datos en Producto indirectamente, sin acceso directo a la tabla.
+
+Prueba :
+-UsuarioLectura intentó insertar datos Producto directamente y recibió un error, ya que solo tiene permisos de lectura sobre la tabla.
+-Al usar insertarProducto, pudo insertar datos en Producto gracias al permiso de ejecución, asegurando una inserción controlada.
+
 
 3. Creación de Roles para Simplificar la Gestión de Permisos
-Para facilitar la administración de permisos, se creó un rol de solo lectura:
--RolRolSoloLectura : Permite únicamente realizar consultas en la tabla Producto.
--Dos usuarios adicionales fueron creados, UsuarioRol1y UsuarioRol2.
-A UsuarioRol1se le asignó el rol RolSoloLectura, mientras que UsuarioRol2 quedó sin rol asignado.
+Los roles en bases de datos permiten agrupar permisos y asignarlos a Múltiples usuarios de forma más eficiente, simplificando la administración. Un rol puede contener permisos específicos que se aplican a todos los usuarios asignados a él, permitiendo un control más sencillo y estructurado.
 
-Se realizaron pruebas para evaluar el comportamiento de ambos usuarios:
--UsuarioRol1Puede consultar datos en la tabla Producto gracias al rol RolSoloLectura, pero no puede modificar ni insertar información.
--UsuarioRol2, al no tener permisos de lectura, no puede acceder a Productoy recibe un error al intentar realizar consultas.
+Implementación : Se creó el rol RolSoloLectura, que otorga permisos de lectura en la tabla Producto. Se crearon dos usuarios adicionales:
+-UsuarioRol1 , asignado al rol RolSoloLectura, tiene permisos para realizar consultas Productopero no puede modificar ni insertar datos.
+-UsuarioRol2 no tiene ningún rol asignado, por lo que no tiene permisos de acceso a Producto.
+
+Prueba :
+-UsuarioRol1 pudo consultar datos en Productogracias a su asignación al rol RolSoloLectura.
+-UsuarioRol2 , al no tener permisos de lectura, no pudo acceder a Productoy recibió un error al intentar realizar consultas.
 
 Conclusión
-El manejo de permisos en la base de datos DB_NEW_ORDER proporciona un entorno seguro y organizado. La correcta asignación de permisos y roles garantiza:
--Seguridad de los datos al limitar el acceso solo a usuarios autorizados.
--Facilidad de administración mediante el uso de roles para grupos de usuarios.
--Flexibilidad en las tareas permitiendo acciones controladas mediante procedimientos almacenados.
-Este esquema de permisos permite gestionar de forma efectiva la seguridad de los datos, asegurando que los usuarios accedan únicamente a las funcionalidades y datos necesarios para su rol.
+La gestión de permisos en la base de datos DB_NEW_ORDER proporciona un entorno seguro y organizado al:
+-Proteger los Datos : Limita el acceso solo a usuarios autorizados, minimizando el riesgo de manipulaciones no autorizadas.
+-Facilitar la Administración con Roles : La creación de roles simplifica la asignación y control de permisos en grupos de usuarios, permitiendo una administración más estructurada y eficiente.
+-Aumentar la Flexibilidad mediante Procedimientos Almacenados : Permite a los usuarios realizar acciones controladas (como inserciones indirectas) mediante permisos de ejecución en procedimientos específicos, sin otorgar acceso directo a las tablas.
+Este esquema de permisos es fundamental para asegurar que cada usuario acceda solo a las funcionalidades y datos necesarios, maximizando la seguridad y la eficacia en el manejo de la información dentro del sistema.
+
 
