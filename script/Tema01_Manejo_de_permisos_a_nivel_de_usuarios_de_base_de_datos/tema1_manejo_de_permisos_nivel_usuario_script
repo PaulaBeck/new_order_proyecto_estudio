@@ -1,7 +1,7 @@
 -------------------------------------------------------------------
--- Tema 2: Manejo de permisos a nivel de usuarios de base de datos --
+-- Tema: Manejo de permisos a nivel de usuarios de base de datos --
 -------------------------------------------------------------------
-Objetivos de Aprendizaje:
+--Objetivos de Aprendizaje:
 --*Entender el manejo de permisos y roles en bases de datos.
 --*Aplicar permisos de lectura, escritura y ejecución para diferentes roles y usuarios.
 
@@ -26,81 +26,66 @@ Objetivos de Aprendizaje:
 --*Crear dos usuarios de base de datos.
 --*Crear un rol que solo permita la lectura de alguna de las tablas creadas.
 --*Darle permiso a uno de los usuarios sobre el rol creado anteriormente.
---*Verificar el comportamiento de ambos usuarios (el que tiene permiso sobre el rol y el que no tiene), cuando intentan leer el contenido de la tabla
+--*Verificar el comportamiento de ambos usuarios (el que tiene permiso sobre el rol y el que no tiene), cuando intentan leer el contenido 
+--de la tabla
+--------------------------------------------------------------------------------------------------------------------------------------------
+-- -------------------------------------------------------------------
+-- 1. Manejo de Permisos a Nivel de Usuarios
+-- -------------------------------------------------------------------
+USE DB_NEW_ORDER;
 
-------------------------------------------------------------------------------------------------------------------------------------------------------
--- 1)Manejo de Permisos a Nivel de Usuarios
---creacion del usuario con permisos de ADMINISTRADOR
+-------------------------------------------------------------------
+-- 1: Creación de Usuarios con Permisos Diferenciados
+-------------------------------------------------------------------
 
+-- 1.1Crear usuario con permisos de administrador
 CREATE LOGIN UsuarioAdmin WITH PASSWORD = 'passwordAdmin';
 CREATE USER UsuarioAdmin FOR LOGIN UsuarioAdmin;
+ALTER ROLE db_owner ADD MEMBER UsuarioAdmin;  -- Otorgar permisos completos
 
---Otorgar permisos de administrador a UsuarioAdmin
-ALTER ROLE db_owner ADD MEMBER UsuarioAdmin;
-
---Realizar un INSERT directamente en la tabla con UsuarioAdmin
-EXECUTE AS USER = 'UsuarioAdmin';--Simular el contexto de UsuarioAdmin
-INSERT Producto (nombre, descripcion, precio, stock, stock_minimo, imagen, id_categoria)
-VALUES 
-('Laptop Noblex', 'Laptop de alto rendimiento', 2000.00, 10, 2, 'laptop_dell.jpg', 1);
-
---Verificar la insercion del nuevo producto
-SELECT * FROM Producto;
-
---Una vez terminada la prueba, volver al contexto del usuario original
-REVERT
-
---creacion del usuario con permisos de solo LECTURA
+-- 1.2Crear usuario con permisos de solo lectura
 CREATE LOGIN UsuarioLectura WITH PASSWORD = 'passwordLectura';
 CREATE USER UsuarioLectura FOR LOGIN UsuarioLectura;
+GRANT SELECT ON Producto TO UsuarioLectura;  -- Permitir solo lecturas en Producto
 
---Otorgar permisos de solo lectura a UsuarioLectura
-GRANT SELECT ON Producto TO UsuarioLectura;
-REVOKE SELECT ON Producto FROM UsuarioLectura;--en caso e querer eliminar el permiso
-
+-------------------------------------------------------------------
+-- 2: Asignación de Permisos de Ejecución de Procedimientos Almacenados
+-------------------------------------------------------------------
 -- Otorgar permiso de ejecución a UsuarioLectura para el procedimiento insertarProducto
 GRANT EXECUTE ON PROCEDURE insertarProducto TO UsuarioLectura;
-EXECUTE AS USER = 'UsuarioLectura';--Simular el contexto de UsuarioLectura
-
---prueba para verificar si se aplico el permiso para el usuarioLectura
+-- Prueba UsuarioLectura: insertar directamente en Producto(NO permite)
+EXECUTE AS USER = 'UsuarioLectura'; -- Simular el contexto de UsuarioLectura
 INSERT Producto (nombre, descripcion, precio, stock, stock_minimo, imagen, id_categoria)
-VALUES ('Lapto', 'Laptop de alto rendimiento', 2000.00, 10, 2, 'laptop_dell.jpg', 1)-- NO DEBE PERMITIR
-
---Realizar un INSERT a través del procedimiento almacenado con el usuario con permiso de solo lectura(tambien falla ya que 
---no tiene permiso de ejecutar el procedimiento)
+VALUES ('Lapto', 'Laptop de alto rendimiento', 2000.00, 10, 2, 'laptop_dell.jpg', 1); -- NO DEBE PERMITIR
+REVERT;
+-- Prueba UsuarioLectura:Realizar un INSERT a través del procedimiento almacenado con el usuario con permiso de solo lectura
+EXECUTE AS USER = 'UsuarioLectura';
 EXEC insertarProducto 'Monitor Len 4K', 'Monitor de alta resolución con 4K UHD', 500.00, 15, 3, 'monitor_dell4k.jpg', 1;
-
 SELECT * FROM Producto;
+REVERT;
 
---Una vez terminada la prueba, volver al contexto del usuario original
-REVERT
+-------------------------------------------------------------------
+--3: Creación de Roles 
+-------------------------------------------------------------------
 
-------------------------------------------------------------------------------------------------------------------------------------------------------
--- 2)Permisos a nivel de roles del DBMS:
---Crear Usuarios y un Rol de Solo Lectura :
-CREATE LOGIN UsuarioRol1 WITH PASSWORD = '1234';
-CREATE USER UsuarioRol1 FOR LOGIN UsuarioRol1;
-CREATE LOGIN UsuarioRol2 WITH PASSWORD = '12345';
-CREATE USER UsuarioRol2 FOR LOGIN UsuarioRol2;
-
--- Crear un rol que solo permite lectura
+-- Creacion del rol que solo permite lectura en Producto
 CREATE ROLE RolSoloLectura;
 GRANT SELECT ON Producto TO RolSoloLectura;
 
--- Asignar el rol a UsuarioRol1
+-- Creacion de usuarios adicionales
+CREATE LOGIN UsuarioRol1 WITH PASSWORD = 'passwordRol1';
+CREATE USER UsuarioRol1 FOR LOGIN UsuarioRol1;
+--otorgar permisos para realizar consultas en Producto y se asigna al UsuarioRol1.
 ALTER ROLE RolSoloLectura ADD MEMBER UsuarioRol1;
-
---Pruebas de Lectura en la Tabla con Usuarios de Roles Diferentes :
---Con UsuarioRol1, intenta seleccionar datos de la tabla Producto(debe permitir la lectura)
+--no tiene ningún rol asignado, por lo que no tiene permisos de acceso 
+CREATE LOGIN UsuarioRol2 WITH PASSWORD = 'passwordRol2';
+CREATE USER UsuarioRol2 FOR LOGIN UsuarioRol2;
+--Pruebas
+-- UsuarioRol1: prueba de lectura en Producto (si permite)
 EXECUTE AS USER = 'UsuarioRol1';
-SELECT * FROM Producto;
-
---verificar que no permita otra accion en producto mas que lectura
-INSERT Producto (nombre, descripcion, precio, stock, stock_minimo, imagen, id_categoria)
-VALUES ('Laptop Lenovo pad', 'Laptop de alto rendimiento', 4000.00, 10, 2, 'laptop_dell.jpg', 1)-- NO DEBE PERMITIR
+SELECT * FROM Producto;  -- Permiso de lectura debido al rol RolSoloLectura
 REVERT;
-
---Con UsuarioRol2(que no tiene permisos), intenta leer la misma tabla (debería fallar)
-EXECUTE AS USER = 'UsuarioRol2';
-SELECT * FROM Producto;
+-- UsuarioRol2: prueba de lectura en Producto (no permite)
+EXECUTE AS USER = 'UsuarioRol2'; -- no tiene permiso de lectura
+SELECT * FROM Producto; 
 REVERT;
