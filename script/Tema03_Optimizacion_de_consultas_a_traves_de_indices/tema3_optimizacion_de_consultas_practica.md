@@ -1,4 +1,4 @@
-**Tema 4: Optimización de consultas a través de índices**:
+**Tema 3: Optimización de consultas a través de índices**:
 
 **Objetivos de Aprendizaje:**
 
