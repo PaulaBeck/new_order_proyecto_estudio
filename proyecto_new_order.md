@@ -2,7 +2,9 @@
     
 # Presentación Proyecto "NEW ORDER"
 
-**Asignatura**: Bases de Datos I (FaCENA-UNNE)
+**Asignatura**: Bases de Datos I (FaCENA-UNNE)  
+
+**Comisión 2 - Grupo 03**  
 
 **Integrantes**:
  - Beck, Ana Paula
@@ -68,12 +70,20 @@ No se tendrá en cuenta la conexión con proveedores o alguna asociación que pr
 
 **TEMA 1: "Manejo de permisos a nivel de usuarios de base de datos"** 
 
+**Permisos**  
+Un permiso es una autorización específica que se concede a un usuario o grupo de usuarios para realizar una acción particular en un objeto de la base de datos (como tablas, vistas o procedimientos almacenados). Los permisos pueden incluir operaciones como SELECT, INSERT, UPDATE, y DELETE, o permisos más específicos como EXECUTE en procedimientos almacenados y ALTER en la estructura de la base de datos. Al asignar permisos, los administradores pueden controlar el acceso de cada usuario a distintas partes de la base de datos y a qué tipo de operaciones pueden realizar en ellas, protegiendo así la integridad y confidencialidad de los datos​.  
+
+**Roles**  
+Un rol es un conjunto de permisos que se asigna como una unidad a uno o más usuarios. En lugar de asignar permisos individuales a cada usuario, los roles permiten agrupar permisos comunes bajo un nombre, simplificando la administración de accesos. Por ejemplo, un rol de "Administrador" puede incluir permisos de lectura y escritura en todas las tablas, mientras que un rol de "Usuario" solo podría tener permisos de lectura. Los roles pueden ser definidos por el sistema (roles predeterminados como db_owner en SQL Server) o creados por el administrador para adaptar el acceso a las necesidades específicas de la organización​
+
+El uso de permisos y roles facilita la administración de seguridad en bases de datos, asegurando que los usuarios tengan el acceso necesario para realizar sus funciones sin comprometer la seguridad o el control sobre los datos sensibles.
+
 **TEMA 2: "Procedimientos y funciones almacenadas"** 
 
-Procedimientos Almacenados  
+**Procedimientos Almacenados**  
 Los procedimientos almacenados son conjuntos de instrucciones SQL que se almacenan en la base de datos y que pueden ser ejecutados como una unidad. Estos procedimientos permiten realizar operaciones complejas, incluyendo consultas, manipulaciones de datos y operaciones condicionales. Los procedimientos almacenados pueden aceptar parámetros de entrada y salida, ejecutar sentencias SQL de manera más eficiente y, por lo general, mejoran la seguridad al permitir el control del acceso a los datos y la lógica encapsulada.
 
-Funciones Almacenadas  
+**Funciones Almacenadas**  
 Las funciones almacenadas son similares a los procedimientos, pero su principal diferencia es que siempre devuelven un valor (o un conjunto de valores) como resultado. Las funciones almacenadas suelen ser utilizadas para realizar cálculos o transformaciones y pueden ser invocadas desde una consulta SQL, como parte de una cláusula SELECT, WHERE u otra. A diferencia de los procedimientos, las funciones tienen restricciones más estrictas sobre lo que pueden hacer dentro de su ejecución (por ejemplo, no pueden modificar directamente los datos de la tabla).
 
 **TEMA 3: "Optimización de consultas a través de índices"**  
@@ -91,29 +101,30 @@ Existen diversos tipos de índices, cada uno diseñado para cumplir funciones es
   - Índice filtrado: aplican filtros para seleccionar subconjuntos de datos. 
 
 **Indices en SQL SERVER:**
- ![tema3_img_comparacion_indices1](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_comparacion_indices1.jpg)
+ ![tema3_img_comparacion_indices1](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_comparacion_indices1.jpg)  
  ![tema3_img_comparacion_indices2](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_comparacion_indices2.jpg)
 
 En la parte práctica de este tema, nos centraremos en crear y analizar el comportamiento de los tiempos de respuesta y el rendimiento de los índices agrupados e índices no agrupados.  
 Las actividades y resolucion de las mismas se encuentran dentro de la carpeta "Tema 3" de este repositorio
 
 **TEMA 4: "Manejo de tipos de datos JSON"** 
-Manejo de tipo de datos con JSON
 
-¿Qué es JSON?
+**¿Qué es JSON?**  
  - Es un formato simple utilizado para almacenar y transportar datos. -Es un formato de texto sin formato, que permite un fácil intercambio de datos entre diferentes lenguajes de programación. -Se utiliza a menudo para enviar datos entre aplicaciones web y servidores.
 
-¿Es JSON un lenguaje de programación?
-
+**¿Es JSON un lenguaje de programación?**  
  - JSON no es un lenguaje de programación. Es, más bien, un formato de intercambio de datos ligero. Si bien se derivó de JavaScript, el propio JSON no soporta funciones de la misma manera que lo JSON se utiliza simplemente para almacenar y transmitir datos entre un servidor y una aplicación web o entre diferentes sistemas.
 
-Manejo de tablas en JSON Para crear tablas y luego insertar datos en JSON
+**Manejo de tablas en JSON Para crear tablas y luego insertar datos en JSON**
  - el proceso es diferente a trabajar directamente con una base de datos como SQL Server, porque JSON es un formato de intercambio de datos y no una estructura de base de datos en sí misma. Sin embargo, SQL Server tiene soporte para trabajar con datos JSON y puede almacenar y consultar datos en formato JSON dentro de tablas.
 
-¿Por qué se utiliza JSON?
+**¿Por qué se utiliza JSON?**
  - La naturaleza independiente del lenguaje de JSON lo convierte en un formato ideal para intercambiar datos a través de diferentes lenguajes de programación y plataformas. Por ejemplo, una aplicación escrita en Java puede enviar fácilmente datos JSON a una aplicación Python. O una aplicación móvil escrita en JavaScript puede usar JSON para comunicarse con un servidor back-end escrito en PHP. ¿Por qué? Porque ambos sistemas pueden analizar y generar JSON. Conclusiones clave
 
- - JSON es un formato de datos popular utilizado a menudo por los desarrolladores web para transferir datos entre un servidor y una aplicación web. *Debido a que JSON está basado en texto, es fácilmente leído por los humanos y entendido por las computadoras. *La naturaleza independiente del lenguaje de JSON lo convierte en un formato ideal para intercambiar datos a través de diferentes lenguajes de programación y plataformas. *Han surgido muchas bases de datos para almacenar e intercambiar datos en JSON.
+ - JSON es un formato de datos popular utilizado a menudo por los desarrolladores web para transferir datos entre un servidor y una aplicación web.
+ - Debido a que JSON está basado en texto, es fácilmente leído por los humanos y entendido por las computadoras.
+ - La naturaleza independiente del lenguaje de JSON lo convierte en un formato ideal para intercambiar datos a través de diferentes lenguajes de programación y plataformas.  
+ - Han surgido muchas bases de datos para almacenar e intercambiar datos en JSON.
 
 ## CAPÍTULO III: METODOLOGÍA SEGUIDA 
 
@@ -151,6 +162,18 @@ Acceso al documento [PDF](doc/DiccionarioDeDatos_NewOrder.pdf) del diccionario d
 
 ## CAPÍTULO V: CONCLUSIONES  
 
+**TEMA 1: "Manejo de permisos a nivel de usuarios de base de datos"**   
+
+La gestión de permisos en la base de datos DB_NEW_ORDER proporciona un entorno seguro y organizado al:  
+
+ 1. Proteger los Datos : Limita el acceso solo a usuarios autorizados, minimizando el riesgo de manipulaciones no autorizadas.
+ 2. Facilitar la Administración con Roles : La creación de roles simplifica la asignación y control de permisos en grupos de usuarios, permitiendo una administración más estructurada y eficiente.
+ 3. Aumentar la Flexibilidad mediante Procedimientos Almacenados : Permite a los usuarios realizar acciones controladas (como inserciones indirectas) mediante permisos de ejecución en procedimientos específicos, sin otorgar acceso directo a las tablas.
+
+Este esquema de permisos es fundamental para asegurar que cada usuario acceda solo a
+las funcionalidades y datos necesarios, maximizando la seguridad y la eficacia en el manejo
+de la información dentro del sistema.
+
 **TEMA 2: "Procedimientos y funciones almacenadas"** 
 
 La implementación de procedimientos y funciones almacenadas en bases de datos es una estrategia ampliamente utilizada para encapsular lógica de negocio directamente en el servidor, aportando múltiples beneficios que optimizan el rendimiento, la seguridad y la modularidad de las aplicaciones. Estas herramientas son valiosas cuando se busca reducir el tráfico de red, simplificar la ejecución de operaciones repetitivas o realizar tareas complejas de forma más eficiente, lo que a menudo lleva a un desarrollo más ágil y menos propenso a errores al centralizar la lógica crítica en un solo punto de control.  
@@ -171,8 +194,23 @@ JSON en bases de datos relacionales facilita el almacenamiento, consulta y manip
 
 ## BIBLIOGRAFÍA DE CONSULTA
 
- 1. List item
- 2. List item
+ 1. Tema 01 - Permisos y roles  
+- Roles y permisos  
+https://axial-sql.com/es/explorando-los-roles-de-base-de-datos-y-los-permisos-de-usuario-en-sql-server/
+
+- Roles en base de datos relacional  
+https://reisdigital.es/datos-e-informacion/roles-en-base-de-datos/  
+
+ 2. Tema 02 - Procedimientos y funciones almacenadas
+- Procedimientos  
+https://axial-sql.com/es/introduccion-a-los-procedimientos-almacenados-en-sql-server/
+
+- Diferencias entre procedimiento y funcion almacenada  
+https://axial-sql.com/es/comprendiendo-las-funciones-y-los-procedimientos-almacenados-en-sql-server/
+
+- Argumentos y explicación de procedimientos y funciones almacenados  
+https://learn.microsoft.com/es-es/sql/t-sql/statements/create-procedure-transact-sql?view=sql-server-ver16
+https://learn.microsoft.com/es-es/sql/t-sql/statements/create-function-transact-sql?view=sql-server-ver16
 
  3. Tema 03 - Índices:  
   - Índices, tipos, usos, diseño óptimo de agrupados y no agrupados (link general)  
@@ -186,15 +224,10 @@ https://www.sqlshack.com/es/uso-de-diferentes-tipos-de-indices-sql-server/
 https://www.sqlshack.com/es/diseno-efectivo-de-indices-agrupados-sql-server/  
 https://www.sqlshack.com/es/diseno-efectivo-de-indices-no-agrupados-sql-server/
 
- 4. List item
-Bibliografía - Tema 04-JSON:
-
- - ¿Qué es JSON?
+ 4. Tema 04 - JSON:
+ - ¿Qué es JSON?  
 https://www.oracle.com/ar/database/what-is-json/
 https://rockcontent.com/es/blog/archivo-json/
 
- - manejo de de funciones json en sql server
+ - Manejo de de funciones json en sql server  
 https://youtu.be/RhxOTqFbI5Q
-
-    
- 5. List item
