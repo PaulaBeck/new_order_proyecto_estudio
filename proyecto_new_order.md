@@ -166,6 +166,7 @@ La implementación de índices, tanto agrupados como no agrupados, ha demostrado
 Las pruebas indican que la reducción en el tiempo de ejecución y en las lecturas lógicas es considerable, lo que resulta en una mejora en la eficiencia general del sistema. Por lo tanto, se recomienda el uso adecuado de índices en el diseño de bases de datos para optimizar el acceso a los datos y mejorar la experiencia del usuario en aplicaciones que dependen de consultas rápidas.
 
 **Tema 4: Manejo de datos con JSON**
+
 JSON en bases de datos relacionales facilita el almacenamiento, consulta y manipulación de datos semiestructurados, proporcionando flexibilidad dentro de una estructura relacional convencional. Esto es útil para escenarios que requieren estructuras de datos dinámicas, almacenamiento de datos anidados o comunicación con sistemas basados en JSON (como APIs).
 
 ## BIBLIOGRAFÍA DE CONSULTA
@@ -186,4 +187,14 @@ https://www.sqlshack.com/es/diseno-efectivo-de-indices-agrupados-sql-server/
 https://www.sqlshack.com/es/diseno-efectivo-de-indices-no-agrupados-sql-server/
 
  4. List item
+Bibliografía - Tema 04-JSON:
+
+ - ¿Qué es JSON?
+https://www.oracle.com/ar/database/what-is-json/
+https://rockcontent.com/es/blog/archivo-json/
+
+ - manejo de de funciones json en sql server
+https://youtu.be/RhxOTqFbI5Q
+
+    
  5. List item
