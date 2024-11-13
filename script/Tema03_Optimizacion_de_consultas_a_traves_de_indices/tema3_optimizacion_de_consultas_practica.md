@@ -21,7 +21,7 @@
 **Resolucion:**
 1) Carga masiva de datos (1 millón de registros):
 
-Se implemento el uso de tabla temporal para el tratamiento y calculos de las fechas, el uso de una tabla a modo de ejemplo siguiendo el modelo del proyecto de estudio, variables locales y bucle while para hacer la insercion de los datos.
+Se implemento el uso de tabla temporal para el tratamiento y calculos de las fechas, el uso de una tabla a modo de ejemplo siguiendo el modelo del proyecto de estudio, variables locales y bucle while para hacer la insercion de los datos en dos tablas distintas para que una posea indices (ventas2) mientras que la otra no (ventas1)
 
 2) Búsqueda sin índice y registro del plan de ejecución:
 
@@ -38,12 +38,9 @@ Se finaliza la consulta deshabiliando las operaciones de tiempo y E/S, se verifi
 	2) Resultados de la revision del plan de ejecución y el tiempo de respuesta
 
 	Tiempo de rta:
-		Registros devueltos: 87.546
-		I/O: Table 'Ventas2'. Scan count 1, logical reads 3109, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
-		SQL Server Execution Times: CPU time = 250 ms,  elapsed time = 862 ms.
-
-Plan de Ejecucion:
- ![tema3_img_ejecucion_2](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_ejecucion_2.jpg)
+		Registros devueltos: 87.455
+		Table 'Ventas1'. Scan count 1, logical reads 3109, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob 			logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
+		SQL Server Execution Times: CPU time = 140 ms,  elapsed time = 1718 ms.
 
 3) Definir un índice agrupado sobre la columna fecha y repetir la consulta anterior.
 
@@ -54,28 +51,21 @@ Para crear el indice agrupado que incluya la columna "fecha_venta" debemos elimi
 Error:
  ![tema3_img_error_3](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_error_3.jpg)
 
-3.A) Eliminar índice agrupado actual (clave primaria).
-
-3.B) Crear un índice agrupado sobre la columna 'fecha_venta'.
-
+3.A) Eliminar índice agrupado actual (clave primaria).  
+3.B) Crear un índice agrupado sobre la columna 'fecha_venta'.  
 3.C) Crear un índice no agrupado sobre la columna 'id_venta'
 
-Indices:
-
+Indices:  
  ![tema3_img_indices_3](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_indices_3.jpg)
-
 
 3.D) Repeticion de la consulta
 
 	3) Resultados de la revision del plan de ejecución y el tiempo de respuesta
 
 	Tiempo de rta:
-		Registros devueltos: 87.546
-		Table 'Ventas2'. Scan count 1, logical reads 362, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
-		SQL Server Execution Times: CPU time = 46 ms,  elapsed time = 535 ms.
-
-Plan de Ejecucion:
- ![tema3_img_ejecucion_3](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_ejecucion_3.jpg)
+		Registros devueltos: 87.455
+		Table 'Ventas2'. Scan count 1, logical reads 361, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
+		SQL Server Execution Times: CPU time = 15 ms,  elapsed time = 567 ms.
 
 4) Borrar el índice creado
 
@@ -83,22 +73,41 @@ Para este paso utilizamos la sentencia "DROP INDEX" indicando el nombre que le d
 
 5)  Definir otro índice agrupado sobre la columna fecha pero que además incluya las columnas seleccionadas y repetir la consulta anterior. Registrar el plan de ejecución utilizado por el motor y los tiempos de respuesta.
 
-5.A) Crear un índice no agrupado que incluya todas las columnas de la tabla (id_venta y total_venta)
-
+5.A) Crear un índice no agrupado que incluya todas las columnas de la tabla (id_venta y total_venta)  
 5.B) Repeticion de la consulta
 
 	5) Resultados de la revision del plan de ejecución y el tiempo de respuesta
 	
 	Tiempo de rta:
-		Registros devueltos: 87.546
+		Registros devueltos: 87.455
 		Table 'Ventas2'. Scan count 1, logical reads 329, physical reads 0, page server reads 0, read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
-		SQL Server Execution Times: CPU time = 15 ms,  elapsed time = 484 ms.
+		SQL Server Execution Times: CPU time = 47 ms,  elapsed time = 506 ms.
+
+5.C) Comparacion de tiempos de rta y plan de ejecucion entre tablas (venta1, sin indice) y (ventas2, con indice no agrupado)
+SELECT *
+FROM Ventas1
+WHERE fecha_venta BETWEEN '2024-01-01' AND '2024-02-01'
+ORDER BY fecha_venta ASC;
+
+/*	Resultados de la revision del plan de ejecución y el tiempo de respuesta
+	Registros devueltos: 87.455
+	Table 'Ventas1'. Scan count 1, logical reads 3109
+	SQL Server Execution Times: CPU time = 219 ms,  elapsed time = 934 ms.
+*/
+
+SELECT *
+FROM Ventas2
+WHERE fecha_venta BETWEEN '2024-01-01' AND '2024-02-01'
+ORDER BY fecha_venta ASC;
+
+/*	Resultados de la revision del plan de ejecución y el tiempo de respuesta
+	Registros devueltos: 87.455
+	Table 'Ventas2'. Scan count 1, logical reads 329
+	SQL Server Execution Times: CPU time = 0 ms,  elapsed time = 884 ms.
+*/
 
 Plan de Ejecucion:
- ![tema3_img_ejecucion_5](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_ejecucion_5.jpg)
-
-Mas detalles del plan de ejecucion:
- ![tema3_img_ejecucion_5b](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_ejecucion_5b.jpg)
+ ![tema3_img_ejecucion_2](https://github.com/PaulaBeck/new_order_proyecto_estudio/blob/master/script/Tema03_Optimizacion_de_consultas_a_traves_de_indices/tema3_img_ejecucion_5.jpg)
 
 6) Expresar las conclusiones en base a las pruebas realizadas.
 
