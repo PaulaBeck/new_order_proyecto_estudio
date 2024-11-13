@@ -10,7 +10,15 @@ USE DB_NEW_ORDER;	-- Ubicarse en la BD a trabajar
 -- 1) Carga masiva de datos (1 millón de registros)
 ----------------------------------------------------------------------
 
--- Creacion de una nueva tabla venta 
+-- Creacion de una nueva tabla venta (ventas 1) -> tabla sin indice
+CREATE TABLE Ventas1 (
+    id_venta INT IDENTITY(1,1),		-- Clave primaria cuyo valor se incrementa automáticamente desde 1 en adelante 
+    fecha_venta DATE,				-- Columna donde se almacenará la fecha de cada venta
+    total_venta DECIMAL(10, 2),		-- Columna donde se almacenará el monto total de cada venta, en formato de hasta 10 digitos con 2 decimales despues de la coma
+	CONSTRAINT PK_Ventas1 PRIMARY KEY (id_venta)
+);
+
+-- Creacion de una nueva tabla venta (ventas 2) -> tabla con indice
 CREATE TABLE Ventas2 (
     id_venta INT IDENTITY(1,1),		-- Clave primaria cuyo valor se incrementa automáticamente desde 1 en adelante 
     fecha_venta DATE,				-- Columna donde se almacenará la fecha de cada venta
@@ -18,7 +26,7 @@ CREATE TABLE Ventas2 (
 	CONSTRAINT PK_Ventas2 PRIMARY KEY (id_venta)
 );
 
--- Carga masiva de datos -> tiempo de ejecucion: 1:05
+-- Carga masiva de datos -> tiempo de ejecucion: 1:03
 
 -- A) Variables a utilizar
 DECLARE @FechaFin DATETIME = '2024-12-31'; -- Fecha final deseada  
@@ -45,7 +53,10 @@ BEGIN
     SET @i = @i + 1;  
 END;  
 
--- D) Insertar los datos de la tabla temporal a la tabla final  
+-- D) Insertar los datos de la tabla temporal a las tablas finales
+INSERT INTO Ventas1 (fecha_venta, total_venta)  
+SELECT fecha_venta, total_venta FROM #TempVentas; 
+
 INSERT INTO Ventas2 (fecha_venta, total_venta)  
 SELECT fecha_venta, total_venta FROM #TempVentas;  
 
@@ -61,14 +72,14 @@ SET STATISTICS TIME ON;
 SET STATISTICS IO ON;
 
 SELECT *
-FROM Ventas2
+FROM Ventas1
 WHERE fecha_venta BETWEEN '2024-01-01' AND '2024-02-01'
 ORDER BY fecha_venta ASC;
 
 /*	Resultados de la revision del plan de ejecución y el tiempo de respuesta
-	Registros devueltos: 87.546
-	Table 'Ventas2'. Scan count 1, logical reads 3109
-	SQL Server Execution Times: CPU time = 250 ms,  elapsed time = 862 ms.
+	Registros devueltos: 87.455
+	Table 'Ventas1'. Scan count 1, logical reads 3109
+	SQL Server Execution Times: CPU time = 140 ms,  elapsed time = 1718 ms.
 */
 
 SET STATISTICS TIME OFF;
@@ -98,9 +109,9 @@ WHERE fecha_venta BETWEEN '2024-01-01' AND '2024-02-01'
 ORDER BY fecha_venta ASC;
 
 /*	Resultados de la revision del plan de ejecución y el tiempo de respuesta
-	Registros devueltos: 87.546
-	Table 'Ventas2'. Scan count 1, logical reads 362
-	SQL Server Execution Times: CPU time = 46 ms,  elapsed time = 535 ms.
+	Registros devueltos: 87.455
+	Table 'Ventas2'. Scan count 1, logical reads 361
+	SQL Server Execution Times: CPU time = 15 ms,  elapsed time = 567 ms.
 */
 
 SET STATISTICS TIME OFF;
@@ -131,10 +142,33 @@ WHERE fecha_venta BETWEEN '2024-01-01' AND '2024-02-01'
 ORDER BY fecha_venta ASC;
 
 /*	Resultados de la revision del plan de ejecución y el tiempo de respuesta
-	Registros devueltos: 87.546
+	Registros devueltos: 87.455
 	Table 'Ventas2'. Scan count 1, logical reads 329
-	SQL Server Execution Times: CPU time = 15 ms,  elapsed time = 484 ms.
+	SQL Server Execution Times: CPU time = 47 ms,  elapsed time = 506 ms.
 */
 
 SET STATISTICS TIME OFF;
 SET STATISTICS IO OFF;
+
+-- 5.C) Comparacion de tiempos de rta y plan de ejecucion entre tablas (venta1, sin indice) y (ventas2, con indice no agrupado)
+SELECT *
+FROM Ventas1
+WHERE fecha_venta BETWEEN '2024-01-01' AND '2024-02-01'
+ORDER BY fecha_venta ASC;
+
+/*	Resultados de la revision del plan de ejecución y el tiempo de respuesta
+	Registros devueltos: 87.455
+	Table 'Ventas1'. Scan count 1, logical reads 3109
+	SQL Server Execution Times: CPU time = 219 ms,  elapsed time = 934 ms.
+*/
+
+SELECT *
+FROM Ventas2
+WHERE fecha_venta BETWEEN '2024-01-01' AND '2024-02-01'
+ORDER BY fecha_venta ASC;
+
+/*	Resultados de la revision del plan de ejecución y el tiempo de respuesta
+	Registros devueltos: 87.455
+	Table 'Ventas2'. Scan count 1, logical reads 329
+	SQL Server Execution Times: CPU time = 0 ms,  elapsed time = 884 ms.
+*/
